@@ -1,10 +1,13 @@
 // libraries
+import { Fragment } from "react";
 import Head from "next/head";
 
 // lib
 import clientPromise from "../lib/mongodb";
 
-export default function Home({ isConnected }) {
+export default function Home({ movies }) {
+  console.log(movies);
+
   return (
     <div>
       <Head>
@@ -15,22 +18,38 @@ export default function Home({ isConnected }) {
       <div className="container mx-auto">
         <h1 className="text-5xl">NextJS and MongoDB</h1>
       </div>
+
+      <div className="container mx-auto">
+        <div className="flex flex-wrap my-16">
+          {movies &&
+            movies.map((movie) => (
+              <Fragment key={movie._id}>
+                <div className="w-1/4 p-16 border border-black">
+                  <h2>Movie Title: {movie.title}</h2>
+                  <p>Release Year: {movie.year}</p>
+                  <p>IMDB Rating: {movie.imdb.rating}</p>
+                </div>
+              </Fragment>
+            ))}
+        </div>
+      </div>
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
   const client = await clientPromise;
+  const db = client.db("sample_mflix");
 
-  // client.db() will be the default database passed in the MONGODB_URI
-  // You can change the database by calling the client.db() function and specifying a database like:
-  // const db = client.db("myDatabase");
-  // Then you can execute queries against your database like so:
-  // db.find({}) or any of the MongoDB Node Driver commands
+  const data = await db
+    .collection("movies")
+    .find({ year: { $gte: 2000 }, "imdb.rating": { $gte: 8 } })
+    .limit(20)
+    .toArray();
 
-  const isConnected = await client.isConnected();
+  const movies = JSON.parse(JSON.stringify(data));
 
   return {
-    props: { isConnected },
+    props: { movies },
   };
 }

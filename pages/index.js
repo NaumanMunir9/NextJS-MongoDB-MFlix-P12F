@@ -5,9 +5,7 @@ import Head from "next/head";
 // lib
 import clientPromise from "../lib/mongodb";
 
-export default function Home({ movies }) {
-  console.log(movies);
-
+export default function HomePage({ movies }) {
   return (
     <div>
       <Head>

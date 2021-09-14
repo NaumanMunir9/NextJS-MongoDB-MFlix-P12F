@@ -24,7 +24,7 @@ export default function MovieDetailsPage({ movie }) {
 
 export async function getServerSideProps(context) {
   const data = await fetch(
-    `http://localhost:3000/api/moviedetails?movie_id=573a13bdf29313caabd582fd`
+    `http://localhost:3000/api/moviedetails?movie_id=${context.query.movie_id}`
   );
   const movie = await data.json();
   console.log(movie);

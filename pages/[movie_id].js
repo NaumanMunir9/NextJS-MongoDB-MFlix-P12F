@@ -1,24 +1,26 @@
 // libraries
 import Head from "next/head";
 
+// components
+import Header from "../components/Header";
+import MovieDetail from "../components/MovieDetail";
+
 export default function MovieDetailsPage({ movie }) {
   if (!movie) return <h2>Loading...</h2>;
 
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>
+          {movie.title} ({movie.year})
+        </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="container mx-auto">
-        <h1 className="text-5xl">Movie Details For: {movie.title}</h1>
-      </div>
+      <Header />
 
-      <div className="container mx-auto">
-        <div className="flex flex-wrap my-16">
-          <img src={movie.poster} alt={movie.title} />
-        </div>
+      <div>
+        <MovieDetail movie={movie} />
       </div>
     </div>
   );

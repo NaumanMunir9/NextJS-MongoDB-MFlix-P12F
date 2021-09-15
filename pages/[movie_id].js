@@ -24,21 +24,13 @@ export default function MovieDetailsPage({ movie }) {
   );
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps(context) {
   const data = await fetch(
-    `http://localhost:3000/api/moviedetails?movie_id=${params.movie_id}`
+    `http://localhost:3000/api/moviedetails?movie_id=${context.query.movie_id}`
   );
   const movie = await data.json();
 
   return {
     props: { movie },
-    revalidate: 1,
   };
 }

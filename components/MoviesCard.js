@@ -35,7 +35,7 @@ export default function MoviesCard({ movies }) {
 
                       <button
                         onClick={() => router.push(`/${movie._id}`)}
-                        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-4 w-full"
+                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-4 w-full"
                       >
                         View
                       </button>

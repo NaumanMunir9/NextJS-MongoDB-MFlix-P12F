@@ -19,6 +19,8 @@ export default function MovieDetailsPage({ movie }) {
 
       <Header />
 
+      {!movie._id && <p>Loading...</p>}
+
       <div>
         <MovieDetail movie={movie} />
       </div>

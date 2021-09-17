@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 export default function MovieDetail({ movie }) {
   const router = useRouter();
 
+  if (!movie) return <h2>Loading...</h2>;
+
   return (
     <>
       <section className="text-gray-700 body-font overflow-hidden bg-white">

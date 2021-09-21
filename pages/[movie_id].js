@@ -30,7 +30,7 @@ export default function MovieDetailsPage({ movie }) {
 
 export async function getServerSideProps(context) {
   const data = await fetch(
-    `https://next-js-mongo-db-mf-lix-p12-f.vercel.app/api/moviedetails?movie_id=${context.query.movie_id}`
+    `${process.env.APP_DOMAIN}/api/moviedetails?movie_id=${context.query.movie_id}`
   );
   const movie = await data.json();
 
